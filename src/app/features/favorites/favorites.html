@@ -1,0 +1,57 @@
+<section class="favorites-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">YOUR PERSONAL COLLECTION</p>
+      <h1>Favorite cities</h1>
+      <p class="subtitle">Keep the places you care about close at hand.</p>
+    </div>
+
+    <span class="count">
+      {{ favoriteCities().length }} {{ favoriteCities().length === 1 ? 'city' :
+      'cities' }}
+    </span>
+  </header>
+
+  @if (favoriteCities().length > 0) {
+  <div class="city-grid">
+    @for (city of favoriteCities(); track city.lat + ',' + city.lon) {
+    <article class="city-card">
+      <a
+        class="city-link"
+        [routerLink]="['/weather', city.lat, city.lon]"
+        [attr.aria-label]="'View weather for ' + city.name"
+      >
+        <div class="city-icon" aria-hidden="true">🌤️</div>
+
+        <div class="city-info">
+          <h2>{{ city.name }}</h2>
+          <p>{{ city.country }}</p>
+        </div>
+
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <button
+        type="button"
+        class="remove-button"
+        (click)="removeFavorite(city.lat, city.lon)"
+        [attr.aria-label]="'Remove ' + city.name + ' from favorites'"
+        title="Remove from favorites"
+      >
+        ♥
+      </button>
+    </article>
+    }
+  </div>
+  } @else {
+  <div class="empty-state">
+    <div class="empty-icon" aria-hidden="true">♡</div>
+    <h2>No favorite cities yet</h2>
+    <p>
+      Explore a city's weather and select “Add to favorites” to keep it here for
+      quick access.
+    </p>
+    <a routerLink="/" class="explore-link">Explore cities <span>→</span></a>
+  </div>
+  }
+</section>

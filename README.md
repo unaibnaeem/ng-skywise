@@ -1,59 +1,121 @@
-# WeatherApp
+# Skywise 🌤️
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.41.
+A minimalist weather application built with **Angular 20** and the **OpenWeatherMap API**. Search for cities, view current weather and a five-day forecast, save favorite locations, and switch between light and dark themes.
 
-## Development server
+## ✨ Features
 
-To start a local development server, run:
+- **Current Weather** — View current conditions for selected cities.
+- **Five-Day Forecast** — Explore upcoming weather using forecast data grouped by day.
+- **City Search** — Search for locations with autocomplete suggestions powered by geocoding.
+- **Keyboard Navigation** — Navigate search suggestions using the keyboard.
+- **Recent Cities** — Quickly revisit recently viewed locations.
+- **Favorites** — Save and manage favorite cities.
+- **Light and Dark Themes** — Switch themes with saved preferences.
+- **Local Storage** — Persist favorites, recent cities, and theme preferences across sessions.
+- **Lazy-Loaded Routes** — Load Home, Favorites, and Weather Details pages on demand.
+- **Responsive Interface** — A clean, minimalist design for checking the weather.
+
+## 🛠️ Built With
+
+- [Angular 20](https://angular.dev/)
+- TypeScript
+- HTML and CSS
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- Angular Router
+- Angular HttpClient
+- Angular Signals
+- Browser Local Storage
+- Angular testing tools
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js and npm compatible with Angular 20
+- Angular CLI
+- An OpenWeatherMap API key
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd weather-app
+```
+
+Replace `<your-repository-url>` with your Git repository URL.
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure your API key
+
+Add your OpenWeatherMap API key to the environment configuration used by your application.
+
+For example, if your project uses `src/environments/environment.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  weatherApiKey: "YOUR_OPENWEATHERMAP_API_KEY",
+};
+```
+
+Use the property name expected by your existing services. If your project already has an environment configuration, update it rather than creating a duplicate.
+
+**Security note:** API keys included in frontend applications can be inspected by users. Avoid committing private credentials to a public repository, and configure appropriate restrictions where supported.
+
+### 4. Run the application
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open [http://localhost:4200](http://localhost:4200) in your browser.
 
-## Code scaffolding
+## 🧭 Application Routes
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Route                | Description                                               |
+| -------------------- | --------------------------------------------------------- |
+| `/`                  | Home page with recent cities and weather information      |
+| `/favorites`         | View and manage favorite cities                           |
+| `/weather/:lat/:lon` | View weather details for a location using its coordinates |
+| Unknown routes       | Redirect to the home page                                 |
 
-```bash
-ng generate component component-name
-```
+The main pages are lazy-loaded through Angular Router.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🧪 Testing
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Run the unit test suite:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+**Latest verified test result:** 82 specs, 0 failures.
 
-For end-to-end (e2e) testing, run:
+The test suite covers services, components, local storage behavior, search interactions, weather API requests, forecast grouping, and route navigation.
+
+## 🏗️ Production Build
+
+Create a production build with:
 
 ```bash
-ng e2e
+ng build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The generated application files are placed in:
 
-## Additional Resources
+```text
+dist/weather-app
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The production build has been verified successfully.
+
+## 🌦️ Weather Data
+
+Weather information is retrieved from OpenWeatherMap. City autocomplete uses geocoding data to identify locations and obtain their coordinates.
+
+An active API key and internet connection are required for live weather data. ☁️

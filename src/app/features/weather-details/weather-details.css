@@ -1,0 +1,153 @@
+.stat {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.stat p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stat strong {
+  font-size: 21px;
+}
+
+.forecast-section {
+  margin-top: 40px;
+}
+
+.forecast-section h2 {
+  margin-bottom: 18px;
+  font-size: 21px;
+  letter-spacing: -0.5px;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 18px 8px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.forecast-day {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.forecast-description {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
+.temperatures {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.temperatures span {
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .forecast-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.favorite-button {
+  padding: 10px 16px;
+  border: 1px solid var(--border, #e6e8ef);
+  border-radius: 999px;
+  background: var(--surface, #fff);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.favorite-button:hover {
+  border-color: var(--accent, #5b78e5);
+}
+
+.city-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.city-country {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.city-title h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: -1px;
+}
+
+.favorite-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text, inherit);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.favorite-button:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.favorite-button > span:first-child {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.favorite-button.is-favorite {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .city-heading {
+    align-items: flex-start;
+  }
+
+  .favorite-button {
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+}

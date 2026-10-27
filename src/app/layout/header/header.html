@@ -1,0 +1,36 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" routerLink="/">
+      <span class="brand-icon">☁</span>
+      <span>Skywise</span>
+    </a>
+
+    <app-search-bar class="header-search" />
+
+    <nav class="actions" aria-label="Main navigation">
+      <a
+        class="favorite-link"
+        routerLink="/favorites"
+        routerLinkActive="active"
+      >
+        <span aria-hidden="true">♡</span>
+        <span>Favorites</span>
+
+        @if (favoriteCount() > 0) {
+        <span class="favorite-count" aria-label="Saved cities">
+          {{ favoriteCount() }}
+        </span>
+        }
+      </a>
+
+      <button
+        class="theme-button"
+        type="button"
+        (click)="toggleTheme()"
+        [attr.aria-label]="isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+      >
+        {{ isDark() ? '☀' : '☾' }}
+      </button>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,73 @@
+<section class="home-page">
+  <div class="welcome">
+    <p class="eyebrow">YOUR WEATHER, SIMPLIFIED</p>
+    <h1>Good weather starts here.</h1>
+    <p class="subtitle">
+      Search for a city above to explore current conditions and the forecast for
+      the days ahead.
+    </p>
+  </div>
+
+  <section class="recent-section">
+    <div class="section-heading">
+      <div>
+        <h2>Recently viewed</h2>
+        <p>Your latest weather searches</p>
+      </div>
+      <span class="count">{{ recentCities().length }} / 6</span>
+    </div>
+
+    @if (cityWeather().length > 0) {
+    <div class="city-grid">
+      @for (item of cityWeather(); track item.city.lat + ',' + item.city.lon) {
+      <a
+        class="city-card"
+        [routerLink]="['/weather', item.city.lat, item.city.lon]"
+      >
+        @if (item.weather; as weather) {
+        <img
+          class="weather-icon"
+          [src]="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'"
+          [alt]="weather.weather[0].description"
+          width="56"
+          height="56"
+        />
+
+        <div class="city-info">
+          <h3>{{ item.city.name }}</h3>
+          <p>{{ weather.weather[0].description }}</p>
+          <span class="city-country">{{ item.city.country }}</span>
+        </div>
+
+        <strong class="city-temperature">
+          {{ weather.main.temp | number:'1.0-0' }}°C
+        </strong>
+        } @else if (item.loading) {
+        <div class="city-info">
+          <h3>{{ item.city.name }}</h3>
+          <p>Loading weather…</p>
+          <span class="city-country">{{ item.city.country }}</span>
+        </div>
+        } @else {
+        <div class="city-info">
+          <h3>{{ item.city.name }}</h3>
+          <p>Weather unavailable</p>
+          <span class="city-country">{{ item.city.country }}</span>
+        </div>
+        }
+
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      }
+    </div>
+    } @else {
+    <div class="empty-state">
+      <div class="empty-icon" aria-hidden="true">🌍</div>
+      <h3>No cities yet</h3>
+      <p>
+        Search for a city to get started. Your recent searches will appear here.
+      </p>
+    </div>
+    }
+  </section>
+</section>

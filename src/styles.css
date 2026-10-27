@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --page: #f8faf9;
+  --surface: #ffffff;
+  --text: #17211f;
+  --muted: #73817c;
+  --border: #e4eae6;
+  --accent: #367d68;
+}
+
+html.dark {
+  color-scheme: dark;
+  --page: #101714;
+  --surface: #19221e;
+  --text: #edf4f0;
+  --muted: #a0b0a8;
+  --border: #2c3932;
+  --accent: #85c9ad;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}

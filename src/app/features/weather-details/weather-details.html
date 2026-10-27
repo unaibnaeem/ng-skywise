@@ -1,0 +1,98 @@
+<a routerLink="/" style="color: var(--accent)">← Back home</a>
+
+@if (loading()) {
+<p>Loading weather...</p>
+} @else if (error()) {
+<p role="alert">{{ error() }}</p>
+} @else if (current(); as weather) {
+<section style="margin-top: 32px">
+  <div class="city-heading">
+    <div class="city-title">
+      <p class="city-country">{{ weather.sys.country }}</p>
+      <h1>{{ weather.name }}</h1>
+    </div>
+
+    <button
+      type="button"
+      class="favorite-button"
+      [class.is-favorite]="isFavorite()"
+      (click)="toggleFavorite()"
+      [attr.aria-pressed]="isFavorite()"
+      [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+    >
+      <span aria-hidden="true">{{ isFavorite() ? '♥' : '♡' }}</span>
+      <span>{{ isFavorite() ? 'Saved' : 'Add to favorites' }}</span>
+    </button>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 16px">
+    <img
+      [src]="'https://openweathermap.org/img/wn/' +
+          weather.weather[0].icon + '@2x.png'"
+      [alt]="weather.weather[0].description"
+    />
+
+    <div>
+      <h2 style="font-size: 48px; margin: 0">
+        {{ weather.main.temp | number:'1.0-0' }}°C
+      </h2>
+      <p>{{ weather.weather[0].description }}</p>
+      <p style="color: var(--muted)">
+        Feels like {{ weather.main.feels_like | number:'1.0-0' }}°C
+      </p>
+    </div>
+  </div>
+
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    "
+  >
+    <article class="stat">
+      <p>Humidity</p>
+      <strong>{{ weather.main.humidity }}%</strong>
+    </article>
+    <article class="stat">
+      <p>Wind</p>
+      <strong>{{ weather.wind.speed }} m/s</strong>
+    </article>
+    <article class="stat">
+      <p>Pressure</p>
+      <strong>{{ weather.main.pressure }} hPa</strong>
+    </article>
+    <article class="stat">
+      <p>Cloud cover</p>
+      <strong>{{ weather.clouds.all }}%</strong>
+    </article>
+  </div>
+
+  <section class="forecast-section">
+    <h2>5-day forecast</h2>
+
+    <div class="forecast-grid">
+      @for (day of dailyForecast(); track day.date) {
+      <article class="forecast-card">
+        <span class="forecast-day">{{ day.day }}</span>
+
+        <img
+          [src]="'https://openweathermap.org/img/wn/' + day.icon + '@2x.png'"
+          [alt]="day.description"
+          width="64"
+          height="64"
+        />
+
+        <span class="forecast-description"> {{ day.description }} </span>
+
+        <div class="temperatures">
+          <strong>{{ day.max }}°</strong>
+          <span>{{ day.min }}°</span>
+        </div>
+      </article>
+      }
+    </div>
+  </section>
+</section>
+}

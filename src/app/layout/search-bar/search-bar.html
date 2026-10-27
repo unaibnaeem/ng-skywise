@@ -1,0 +1,52 @@
+<div class="search-wrap">
+  <span class="search-icon mb-1 lg:mb-1.5" aria-hidden="true">⌕</span>
+
+  <input
+    type="search"
+    [formControl]="query"
+    (focus)="query.value.trim().length >= 2 && isOpen.set(true)"
+    (keydown)="onKeydown($event)"
+    placeholder="Search for a city..."
+    aria-label="Search for a city"
+    role="combobox"
+    aria-autocomplete="list"
+    aria-controls="city-suggestions"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-activedescendant]="activeIndex() >= 0 ? 'city-option-' + activeIndex() : null"
+  />
+
+  @if (loading()) {
+  <span class="search-status">Searching…</span>
+  } @if (isOpen()) {
+  <div class="suggestions" id="city-suggestions" role="listbox">
+    @if (loading()) {
+    <div class="suggestion-message">Finding cities…</div>
+    } @else if (error()) {
+    <div class="suggestion-message" role="alert">{{ error() }}</div>
+    } @else if (suggestions().length === 0) {
+    <div class="suggestion-message">No cities found. Try another name.</div>
+    } @else { @for (city of suggestions(); track city.lat + ',' + city.lon; let
+    i = $index) {
+    <button
+      type="button"
+      class="suggestion"
+      [class.selected]="activeIndex() === i"
+      [id]="'city-option-' + i"
+      role="option"
+      [attr.aria-selected]="activeIndex() === i"
+      (mouseenter)="activeIndex.set(i)"
+      (click)="selectCity(city)"
+    >
+      <span class="city-pin">⌖</span>
+      <span class="city-info">
+        <strong>{{ city.name }}</strong>
+        <small>
+          {{ city.state ? city.state + ', ' : '' }}{{ city.country }}
+        </small>
+      </span>
+      <span class="city-arrow">↗</span>
+    </button>
+    } }
+  </div>
+  }
+</div>
