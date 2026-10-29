@@ -38,11 +38,9 @@ A minimalist weather application built with **Angular 20** and the **OpenWeather
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/unaibnaeem/ng-skywise.git
 cd weather-app
 ```
-
-Replace `<your-repository-url>` with your Git repository URL.
 
 ### 2. Install dependencies
 
